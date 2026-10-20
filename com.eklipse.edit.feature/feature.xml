@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.eklipse.edit.feature"
+      label="Eklipse Edit"
+      version="1.0.0.qualifier"
+      provider-name="Eklipse">
+
+   <description>
+      VS Code style editing for Eclipse: Copy and Cut take the whole line when nothing is selected, and Paste puts such
+      a line above the current one.
+   </description>
+
+   <plugin
+         id="com.eklipse.edit"
+         version="0.0.0"/>
+
+</feature>

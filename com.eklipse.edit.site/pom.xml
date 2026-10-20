@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.eklipse</groupId>
+		<artifactId>edit-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<!-- Produces target/repository (a p2 update site) and a zipped copy of it -->
+	<artifactId>com.eklipse.edit.site</artifactId>
+	<packaging>eclipse-repository</packaging>
+
+	<profiles>
+		<!-- Used by the update site workflow: PGP-signs the plugin and the feature, so Eclipse asks once whether to trust
+			the signer instead of warning about unsigned content on every install. Needs the armored secret key in a file,
+			passed with -Dtycho.pgp.signer.bc.secretKeys=<file>, and its passphrase in the environment variable
+			MAVEN_GPG_PASSPHRASE. -->
+		<profile>
+			<id>sign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-gpg-plugin</artifactId>
+						<version>${tycho.version}</version>
+						<executions>
+							<execution>
+								<id>pgp-sign</id>
+								<goals>
+									<goal>sign-p2-artifacts</goal>
+								</goals>
+								<configuration>
+									<!-- Bouncy Castle, no gpg installation needed -->
+									<signer>bc</signer>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

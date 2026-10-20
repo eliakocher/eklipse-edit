@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.eklipse.edit.copy"
+            name="Copy, Whole Line If Nothing Selected"
+            description="Copies the selection, or the current line when nothing is selected, like VS Code"
+            categoryId="org.eclipse.ui.category.edit"
+            defaultHandler="com.eklipse.edit.ui.CopyLineHandler">
+      </command>
+      <command
+            id="com.eklipse.edit.cut"
+            name="Cut, Whole Line If Nothing Selected"
+            description="Cuts the selection, or the current line when nothing is selected, like VS Code"
+            categoryId="org.eclipse.ui.category.edit"
+            defaultHandler="com.eklipse.edit.ui.CutLineHandler">
+      </command>
+      <command
+            id="com.eklipse.edit.paste"
+            name="Paste, Whole Line Above"
+            description="Pastes a line copied or cut without selection above the current line, like VS Code"
+            categoryId="org.eclipse.ui.category.edit"
+            defaultHandler="com.eklipse.edit.ui.PasteLineHandler">
+      </command>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.bindings">
+      <!-- M1 = Cmd on macOS, Ctrl elsewhere. Text editors only: these bindings win over the window's Copy, Cut and Paste
+         there, and the handlers run those whenever the editor's text doesn't have the focus or something is selected. -->
+      <key
+            commandId="com.eklipse.edit.copy"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.textEditorScope"
+            sequence="M1+C">
+      </key>
+      <key
+            commandId="com.eklipse.edit.cut"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.textEditorScope"
+            sequence="M1+X">
+      </key>
+      <key
+            commandId="com.eklipse.edit.paste"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.textEditorScope"
+            sequence="M1+V">
+      </key>
+   </extension>
+</plugin>
